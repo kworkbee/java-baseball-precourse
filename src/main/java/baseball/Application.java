@@ -8,6 +8,15 @@ import nextstep.utils.Randoms;
 
 public class Application {
 
+    enum GameMode {
+        ONGOING(0), RENEW(1), STOP(2);
+        final int value;
+
+        GameMode(int enumType) {
+            this.value = enumType;
+        }
+    }
+
     private static String initRandom() {
         String ret = "";
 
@@ -17,11 +26,8 @@ public class Application {
             int random = Randoms.pickNumberInRange(0, 9);
             if (!numbers.contains(random)) {
                 numbers.add(random);
+                ret = ret.concat(String.valueOf(random));
             }
-        }
-
-        for (int number: numbers) {
-            ret = ret + number;
         }
 
         return ret;
@@ -53,7 +59,7 @@ public class Application {
         int ball = 0;
         int nothing = 0;
 
-        for (int i = 0; i < comparisonTarget.length(); i++) {
+        for (int i = 0; i < origin.length(); i++) {
             if (origin.charAt(i) == comparisonTarget.charAt(i)) {
                 strike++;
             } else {
@@ -73,17 +79,22 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        while (true) {
-            System.out.print("숫자 야구 게임 - 숫자를 입력하세요: ");
-            System.out.println();
+        GameMode mode = GameMode.ONGOING;
+        String random = initRandom();
 
-            // Initialize Data
-            String random = initRandom();
+        while (mode != GameMode.STOP) {
+
+            if (mode == GameMode.RENEW) {
+                random = initRandom();
+                mode = GameMode.ONGOING;
+            }
+
+            System.out.print("숫자를 입력해주세요 : ");
             String userInput = getUserInput();
 
             // Validation
             if (!validateUserInput(userInput)) {
-                System.out. println("잘못된 입력입니다.");
+                System.out.println("[ERROR] 잘못된 입력입니다.");
             } else {
                 // Comparison
                 HashMap<String, Integer> resultMap = compare(random, userInput);
@@ -92,22 +103,31 @@ public class Application {
                 int ball = resultMap.get("ball");
                 int nothing = resultMap.get("nothing");
 
-                if (nothing > 0) {
-                    System.out.print("낫싱");
+                if (nothing == 3) {
+                    System.out.println("낫싱");
                 } else {
-                    if (strike > 0) {
-                        System.out.print(strike + "스트라이크 ");
-                        if (strike == 3) {
-                            break;
+                    if (strike == 3) {
+                        System.out.println("3스트라이크");
+                        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+                        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+
+                        String willDo = Console.readLine();
+                        if (willDo.equals("2")) {
+                            mode = GameMode.STOP;
+                            continue;
+                        } else if (willDo.equals("1")) {
+                            mode = GameMode.RENEW;
                         }
+                    } else if (strike == 1 || strike == 2) {
+                        System.out.print(strike + "스트라이크 ");
                     }
 
                     if (ball > 0) {
                         System.out.print(ball + "볼 ");
                     }
-                }
 
-                System.out.println();
+                    System.out.println();
+                }
             }
         }
 
