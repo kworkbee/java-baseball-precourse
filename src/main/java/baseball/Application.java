@@ -1,5 +1,6 @@
 package baseball;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import nextstep.utils.Console;
@@ -30,7 +31,32 @@ public class Application {
         return Console.readLine();
     }
 
-    public static void main(String[] args) {
+    private static HashMap<String, Integer> compare(String origin, String comparisonTarget) {
+        HashMap<String, Integer> comparisonResult = new HashMap<>();
 
+        int strike = 0;
+        int ball = 0;
+        int nothing = 0;
+
+        for (int i = 0; i < comparisonTarget.length(); i++) {
+            if (origin.charAt(i) == comparisonTarget.charAt(i)) {
+                strike++;
+            } else {
+                if (origin.indexOf(comparisonTarget.charAt(i)) != -1) {
+                    ball++;
+                } else {
+                    nothing++;
+                }
+            }
+        }
+
+        comparisonResult.put("strike", strike);
+        comparisonResult.put("ball", ball);
+        comparisonResult.put("nothing", nothing);
+
+        return comparisonResult;
+    }
+
+    public static void main(String[] args) {
     }
 }
