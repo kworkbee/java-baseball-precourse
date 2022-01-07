@@ -1,5 +1,7 @@
 package baseball;
 
+import java.util.HashSet;
+import java.util.Set;
 import nextstep.utils.Console;
 import nextstep.utils.Randoms;
 
@@ -10,13 +12,18 @@ public class Application {
     }
 
     private static boolean validateUserInput(String userInput) {
+        Set<Integer> numbers = new HashSet<>();
         try {
             Integer.parseInt(userInput);
         } catch (NumberFormatException nfe) {
             return false;
         }
 
-        return userInput.length() == 3;
+        for (String s: userInput.split("")) {
+            numbers.add(Integer.parseInt(s));
+        }
+
+        return userInput.length() == 3 && numbers.size() == 3;
     }
 
     private static String getUserInput() {
@@ -24,6 +31,6 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        // TODO 숫자 야구 게임 구현
+
     }
 }
