@@ -58,5 +58,44 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        while (true) {
+            System.out.print("숫자 야구 게임 - 숫자를 입력하세요: ");
+            System.out.println();
+
+            // Initialize Data
+            String random = initRandom();
+            String userInput = getUserInput();
+
+            // Validation
+            if (!validateUserInput(userInput)) {
+                System.out.println("잘못된 입력입니다.");
+            } else {
+                // Comparison
+                HashMap<String, Integer> resultMap = compare(random, userInput);
+
+                int strike = resultMap.get("strike");
+                int ball = resultMap.get("ball");
+                int nothing = resultMap.get("nothing");
+
+                if (nothing > 0) {
+                    System.out.print("낫싱");
+                } else {
+                    if (strike > 0) {
+                        System.out.print(strike + "스트라이크 ");
+                        if (strike == 3) {
+                            break;
+                        }
+                    }
+
+                    if (ball > 0) {
+                        System.out.print(ball + "볼 ");
+                    }
+                }
+
+                System.out.println();
+            }
+        }
+
+        System.out.println("게임 끝");
     }
 }
