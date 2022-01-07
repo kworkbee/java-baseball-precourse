@@ -9,7 +9,22 @@ import nextstep.utils.Randoms;
 public class Application {
 
     private static String initRandom() {
-        return String.valueOf(Randoms.pickNumberInRange(123, 987));
+        String ret = "";
+
+        Set<Integer> numbers = new HashSet<>();
+
+        while (numbers.size() != 3) {
+            int random = Randoms.pickNumberInRange(0, 9);
+            if (!numbers.contains(random)) {
+                numbers.add(random);
+            }
+        }
+
+        for (int number: numbers) {
+            ret = ret + number;
+        }
+
+        return ret;
     }
 
     private static boolean validateUserInput(String userInput) {
@@ -68,7 +83,7 @@ public class Application {
 
             // Validation
             if (!validateUserInput(userInput)) {
-                System.out.println("잘못된 입력입니다.");
+                System.out. println("잘못된 입력입니다.");
             } else {
                 // Comparison
                 HashMap<String, Integer> resultMap = compare(random, userInput);
