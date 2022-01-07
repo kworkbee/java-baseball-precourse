@@ -5,3 +5,15 @@
 
 ## 과제 제출 과정
 * [과제 제출 방법](https://github.com/next-step/nextstep-docs/tree/master/precourse)
+
+## 구현할 기능
+
+- 랜덤 넘버 생성
+- 사용자 넘버 입력
+- 숫자 비교
+- 비교 결과로서 힌트 제공
+    - Strike
+    - Ball
+    - Nothing
+- 조건부 종료
+  - 사용자가 3개 숫자 모두 맞힌 경우
