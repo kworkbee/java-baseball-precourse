@@ -12,7 +12,7 @@ public class GameManager {
     private final int BALLS = 3;
 
     private GameMode MODE;
-    private Player player;
+    private Player PLAYER;
 
     private String RANDOM_NUMBER;
 
@@ -21,7 +21,7 @@ public class GameManager {
     private int NOTHING;
 
     public GameManager(Player player) {
-        this.player = player;
+        this.PLAYER = player;
         resetBalls();
         initState();
     }
@@ -58,10 +58,6 @@ public class GameManager {
         this.RANDOM_NUMBER = sb.toString();
     }
 
-    private String getRandomNumber() {
-        return this.RANDOM_NUMBER;
-    }
-
     private void compare(String origin, String comparisonTarget) {
         for (int i = 0; i < this.BALLS; i++) {
             if (origin.charAt(i) == comparisonTarget.charAt(i)) {
@@ -86,6 +82,26 @@ public class GameManager {
         }
     }
 
+    private void judgement() {
+        if (this.NOTHING == 3) {
+            System.out.print("낫싱");
+        } else if (this.STRIKE == 3) {
+            System.out.println("3스트라이크");
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+
+            endOneTurn();
+        } else if (this.STRIKE == 1 || this.STRIKE == 2) {
+            System.out.print(this.STRIKE + "스트라이크 ");
+        }
+
+        if (this.MODE == GameMode.ONGOING && this.BALL > 0) {
+            System.out.print(this.BALL + "볼 ");
+        }
+
+        System.out.println();
+    }
+
     public void play() {
         // While player wants not to stop
         while (this.MODE != GameMode.STOP) {
@@ -97,32 +113,17 @@ public class GameManager {
                 initState();
             }
 
-            this.player.getUserInput();
+            this.PLAYER.getUserInput();
 
             // Validate Player Input
-            if (!this.player.validateInput()) {
+            if (!this.PLAYER.validateInput()) {
                 System.out.println("[ERROR] 잘못된 입력입니다.");
             } else {
                 // Comparison
-                compare(this.getRandomNumber(), this.player.getUserGuess());
+                compare(this.RANDOM_NUMBER, this.PLAYER.getUserGuess());
 
-                if (this.NOTHING == 3) {
-                    System.out.print("낫싱");
-                } else if (this.STRIKE == 3) {
-                    System.out.println("3스트라이크");
-                    System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-                    System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-
-                    endOneTurn();
-                } else if (this.STRIKE == 1 || this.STRIKE == 2) {
-                    System.out.print(this.STRIKE + "스트라이크 ");
-                }
-
-                if (this.MODE == GameMode.ONGOING && this.BALL > 0) {
-                    System.out.print(this.BALL + "볼 ");
-                }
-
-                System.out.println();
+                // Judgement
+                judgement();
             }
         }
         System.out.println("게임 끝");
