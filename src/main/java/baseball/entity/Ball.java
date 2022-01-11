@@ -9,19 +9,18 @@ import java.util.Objects;
  */
 public class Ball {
 
-    private final int MIN_POSITION = 1;
-    private final int MAX_POSITION = 3;
-    private final int MIN_NUMBER = 1;
-    private final int MAX_NUMBER = 9;
-
     private final int position;
     private final int number;
 
     public Ball(int position, int number) {
+        int MIN_POSITION = 1;
+        int MAX_POSITION = 3;
         if (position < MIN_POSITION || position > MAX_POSITION) {
             throw new IllegalArgumentException();
         }
 
+        int MIN_NUMBER = 1;
+        int MAX_NUMBER = 9;
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException();
         }
@@ -32,6 +31,7 @@ public class Ball {
 
     /**
      * 볼 숫자 반환
+     *
      * @return nth 볼 숫자 반환
      */
     public int number() {
@@ -56,5 +56,10 @@ public class Ball {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return "Ball{position=" + position + " number=" + number + "}";
     }
 }

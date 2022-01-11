@@ -1,8 +1,7 @@
 package baseball.utils;
 
 /**
- * Message
- * Message 관리 객체
+ * Message Message 관리 객체
  *
  * @author G1.Jeon <g1.tommy.jeon@gmail.com>
  */
@@ -17,7 +16,8 @@ public class Message {
     private static final String MSG_GAME_RESULT_STRIKE_FORMAT = "%d스트라이크 ";
     private static final String MSG_GAME_RESULT_BALL_FORMAT = "%d볼 ";
 
-    private Message() {}
+    private Message() {
+    }
 
     /**
      * 플레이어 입력 요청 메시지
@@ -49,6 +49,7 @@ public class Message {
 
     /**
      * 3 STRIKE 메시지
+     *
      * @param TOTAL_BALLS 총 볼 개수
      */
     public static void printFullStrike(int TOTAL_BALLS) {
@@ -59,6 +60,7 @@ public class Message {
 
     /**
      * Strike 메시지
+     *
      * @param STRIKE 스트라이크 수
      */
     public static void printStrike(long STRIKE) {
@@ -67,6 +69,7 @@ public class Message {
 
     /**
      * Ball 메시지
+     *
      * @param BALL 볼 수
      */
     public static void printBall(long BALL) {

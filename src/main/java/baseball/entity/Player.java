@@ -7,8 +7,7 @@ import java.util.NoSuchElementException;
 import nextstep.utils.Console;
 
 /**
- * 숫자 야구 게임 Player Class
- * - 플레이어 행위 정의
+ * 숫자 야구 게임 Player Class - 플레이어 행위 정의
  *
  * @author G1.Jeon <g1.tommy.jeon@gmail.com>
  */
@@ -19,7 +18,8 @@ public class Player {
      */
     private BallGroup guess;
 
-    public Player() {}
+    public Player() {
+    }
 
     /**
      * 사용자의 추측값 콘솔 입력

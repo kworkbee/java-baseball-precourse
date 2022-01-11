@@ -13,8 +13,7 @@ import java.util.stream.IntStream;
 import nextstep.utils.Console;
 
 /**
- * GameManager
- * 게임 Turn 진행 관리 객체
+ * GameManager 게임 Turn 진행 관리 객체
  *
  * @author G1.Jeon <g1.tommy.jeon@gmail.com>
  */
@@ -46,8 +45,7 @@ public class BaseballGame {
     private long NOTHING;
 
     /**
-     * 게임 진행 위한 플레이어 객체 주입
-     * 초기 상태 셋업
+     * 게임 진행 위한 플레이어 객체 주입 초기 상태 셋업
      *
      * @param player 플레이어 객체
      */
@@ -58,9 +56,7 @@ public class BaseballGame {
     }
 
     /**
-     * 초기 상태 셋업
-     * - 모드 설정
-     * - 난수 생성
+     * 초기 상태 셋업 - 모드 설정 - 난수 생성
      */
     private void initState() {
         this.MODE = GameMode.ONGOING;
@@ -79,31 +75,26 @@ public class BaseballGame {
     /**
      * 볼 수 계산
      *
-     * @param idx ith index
+     * @param idx   ith index
      * @param value 볼 숫자
      * @return 볼 수
      */
     private long compareBall(int idx, Ball value) {
-        return IntStream.range(1, BALLS + 1)
-            .filter(i -> i != idx)
-            .filter(i -> RANDOM_BALLS.value(i - 1).number() == value.number())
-            .count();
+        return IntStream.range(1, BALLS + 1).filter(i -> i != idx)
+            .filter(i -> RANDOM_BALLS.value(i - 1).number() == value.number()).count();
     }
 
     /**
-     * 값 비교
-     * - 컴퓨터 생성 난수
-     * - 사용자 입력 추측값
+     * 값 비교 - 컴퓨터 생성 난수 - 사용자 입력 추측값
      *
-     * @param playerBalls       비교대상 (플레이어 추측값)
+     * @param playerBalls 비교대상 (플레이어 추측값)
      */
     private void compare(BallGroup playerBalls) {
         STRIKE = IntStream.range(1, BALLS + 1)
             .filter(i -> RANDOM_BALLS.value(i - 1).number() == playerBalls.value(i - 1).number())
             .count();
         BALL = IntStream.range(1, BALLS + 1)
-            .map(i -> (int) compareBall(i, playerBalls.value(i - 1)))
-            .sum();
+            .map(i -> (int) compareBall(i, playerBalls.value(i - 1))).sum();
         if (STRIKE == 0 && BALL == 0) {
             NOTHING = 3;
         }
@@ -118,8 +109,7 @@ public class BaseballGame {
         String COMMAND_STOP = "2";
         if (willDo.equals(COMMAND_RENEW)) {
             MODE = GameMode.RENEW;
-        }
-        else if (willDo.equals(COMMAND_STOP)) {
+        } else if (willDo.equals(COMMAND_STOP)) {
             MODE = GameMode.STOP;
         }
     }
@@ -148,7 +138,7 @@ public class BaseballGame {
 
     /**
      * 게임 진행 핵심 로직
-     *
+     * <p>
      * - 스트라이크 결과를 만들 때까지 반복 진행
      */
     public void play() {

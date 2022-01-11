@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
  * @author G1.Jeon <g1.tommy.jeon@gmail.com>
  */
 public class BallGroup {
+
     private final List<Ball> balls;
 
     public BallGroup(List<Ball> balls) {
@@ -20,7 +21,7 @@ public class BallGroup {
      * Ball 값 가젹오기
      *
      * @param i Get ith element from list
-     * @return
+     * @return int type value - 볼 숫자
      */
     public Ball value(int i) {
         return balls.get(i);
@@ -29,7 +30,7 @@ public class BallGroup {
     /**
      * 플레이어 입력 숫자의 유효성 검사
      *
-     * @throws NumberFormatException
+     * @throws NumberFormatException 포맷 예외
      */
     private void validateNumbers(List<Ball> balls) throws NumberFormatException {
         List<Ball> distinctBalls = balls.stream()

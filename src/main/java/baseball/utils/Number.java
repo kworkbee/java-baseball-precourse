@@ -9,8 +9,7 @@ import java.util.stream.IntStream;
 import nextstep.utils.Randoms;
 
 /**
- * Number Util
- * 볼에 들어가는 숫자 생성 관련
+ * Number Util 볼에 들어가는 숫자 생성 관련
  *
  * @author G1.Jeon <g1.tommy.jeon@gmail.com>
  */
@@ -19,10 +18,12 @@ public class Number {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 9;
 
-    private Number() {}
+    private Number() {
+    }
 
     /**
      * 게임 볼에 필요한 난수 생성
+     *
      * @param REQUIRE_BALLS 필요 볼 개수
      * @return List<Ball> Typed - randomized balls
      */
