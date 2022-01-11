@@ -1,5 +1,10 @@
 package baseball;
 
+import baseball.entity.GameMode;
+import baseball.entity.Player;
+import baseball.service.BaseballGame;
+import baseball.utils.Message;
+
 /**
  * 숫자 야구 게임
  *
@@ -9,10 +14,12 @@ public class Application {
 
     /**
      * 숫자 야구 게임 메인 메서드 (비즈니스 로직)
-     * @param args
      */
     public static void main(String[] args) {
-        GameManager gm = new GameManager(new Player());
-        gm.play();
+        BaseballGame game = new BaseballGame(new Player());
+        while (game.mode() != GameMode.STOP) {
+            game.play();
+        }
+        Message.printGameEnds();
     }
 }

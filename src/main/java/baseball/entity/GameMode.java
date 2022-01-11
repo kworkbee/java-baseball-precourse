@@ -1,4 +1,4 @@
-package baseball;
+package baseball.entity;
 
 /**
  * 게임 모드 정의 enum
